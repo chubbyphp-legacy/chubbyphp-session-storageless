@@ -41,7 +41,7 @@ composer require chubbyphp/chubbyphp-session-storageless "^1.0"
 openssl rand -base64 32
 ```
 
-### Use middleware with storageless
+#### Use middleware with storageless
 
 ```php
 <?php
@@ -71,7 +71,7 @@ openssl genrsa -out signatureKey 512
 openssl rsa -in signatureKey -out verificationKey -outform PEM -pubout
 ```
 
-### Use middleware with storageless
+#### Use middleware with storageless
 
 ```php
 <?php
