@@ -11,15 +11,15 @@
     ],
     "require": {
         "php": "^7.2",
-        "dflydev/fig-cookies": "^2.0",
-        "lcobucci/jwt": "^3.2",
-        "lcobucci/clock": "^1.2",
-        "zendframework/zend-expressive-session": "^1.2"
+        "zendframework/zend-expressive-session": "^1.2",
+        "psr7-sessions/storageless": "^5.0"
     },
     "require-dev": {
         "chubbyphp/chubbyphp-mock": "^1.4",
         "phpunit/phpunit": "^8.1",
-        "phploc/phploc": "^5.0"
+        "phploc/phploc": "^5.0",
+        "zendframework/zend-stratigility": "^3.1",
+        "zendframework/zend-diactoros": "^2.1"
     },
     "autoload": {
         "psr-4": { "Chubbyphp\\Session\\Storageless\\": "src/" }
