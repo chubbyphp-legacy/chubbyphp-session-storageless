@@ -94,7 +94,8 @@ PbQ839hbekzuV+y8Me+JSUHgybVMg9BDzRXwON7f
 -----END RSA PRIVATE KEY-----',
         '-----BEGIN PUBLIC KEY-----
 MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKgrmaZQsaEXrlNahrSKzKwWOgEt0SSF
-lv+Onm94oWNfx7ghZ+UpcgTwFl+oNMa/AbpO2a6fTuj558/Z0SlWFdUCAwEAAQ==',
+lv+Onm94oWNfx7ghZ+UpcgTwFl+oNMa/AbpO2a6fTuj558/Z0SlWFdUCAwEAAQ==
+-----END PUBLIC KEY-----',
     1200
 ));
 $middlewarePipe->pipe(new ZendSessionMiddleware(new PSR7StoragelessSessionPersistence()));
