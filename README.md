@@ -12,6 +12,8 @@
 
 [psr7-sessions/storageless][2] persistence adapter for [zendframework/zend-expressive-session][3].
 
+**Important**: Once the [Pull Request][4] within [psr7-sessions/storageless][2] gets merged, this repo is not needed anymore.
+
 ## Requirements
 
 * php: ^7.2
@@ -108,3 +110,4 @@ Dominik Zogg 2019
 [1]: https://packagist.org/packages/chubbyphp/chubbyphp-session-storageless
 [2]: https://github.com/psr7-sessions/storageless
 [3]: https://github.com/zendframework/zend-expressive-session
+[4]: https://github.com/psr7-sessions/storageless/pull/82
