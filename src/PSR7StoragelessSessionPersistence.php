@@ -20,9 +20,16 @@ final class PSR7StoragelessSessionPersistence implements SessionPersistenceInter
      */
     public function initializeSessionFromRequest(ServerRequestInterface $request): ZendSessionInterface
     {
-        /** @var PSR7SessionInterface $psr7StoragelessSession */
-        if (null === $psr7StoragelessSession = $request->getAttribute(PSR7SessionMiddleware::SESSION_ATTRIBUTE)) {
-            throw MissingMiddlewareException::createForMissingMiddleware(PSR7SessionMiddleware::class, __METHOD__);
+        /** @var PSR7SessionInterface|null $psr7StoragelessSession */
+        $psr7StoragelessSession = $request->getAttribute(PSR7SessionMiddleware::SESSION_ATTRIBUTE);
+        if (!$psr7StoragelessSession instanceof PSR7SessionInterface) {
+            throw new \UnexpectedValueException(
+                sprintf(
+                    'Please add the following middleware "%s" before execute this method "%s"',
+                    PSR7SessionMiddleware::class,
+                    __METHOD__
+                )
+            );
         }
 
         return new PSR7SessionAdapter($psr7StoragelessSession);

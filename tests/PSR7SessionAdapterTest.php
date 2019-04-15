@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Chubbyphp\Tests\Session\Storageless;
 
+use Chubbyphp\Mock\Argument\ArgumentCallback;
 use Chubbyphp\Mock\Call;
 use Chubbyphp\Mock\MockByCallsTrait;
-use Chubbyphp\Session\Storageless\NotImplementedException;
 use Chubbyphp\Session\Storageless\PSR7SessionAdapter;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -105,13 +105,19 @@ final class PSR7SessionAdapterTest extends TestCase
 
     public function testRegenerate(): void
     {
-        $this->expectException(NotImplementedException::class);
-        $this->expectExceptionMessage(
-            'Method "Chubbyphp\Session\Storageless\PSR7SessionAdapter::regenerate" was not implemented'
-        );
-
         /** @var PSR7SessionInterface|MockObject $session */
-        $session = $this->getMockByCalls(PSR7SessionInterface::class);
+        $session = $this->getMockByCalls(PSR7SessionInterface::class, [
+            Call::create('set')
+                ->with(
+                    '_regenerated',
+                    new ArgumentCallback(function (int $timestamp) {
+                        $now = time();
+
+                        self::assertGreaterThanOrEqual($now, $timestamp + 10);
+                        self::assertLessThanOrEqual($now, $timestamp);
+                    })
+                ),
+        ]);
 
         $sessionAdapter = new PSR7SessionAdapter($session);
         $sessionAdapter->regenerate();
@@ -120,10 +126,12 @@ final class PSR7SessionAdapterTest extends TestCase
     public function testIsRegenerated(): void
     {
         /** @var PSR7SessionInterface|MockObject $session */
-        $session = $this->getMockByCalls(PSR7SessionInterface::class);
+        $session = $this->getMockByCalls(PSR7SessionInterface::class, [
+            Call::create('has')->with('_regenerated')->willReturn(true),
+        ]);
 
         $sessionAdapter = new PSR7SessionAdapter($session);
 
-        self::assertFalse($sessionAdapter->isRegenerated());
+        self::assertTrue($sessionAdapter->isRegenerated());
     }
 }

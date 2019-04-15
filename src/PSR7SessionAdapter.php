@@ -9,6 +9,8 @@ use Zend\Expressive\Session\SessionInterface as ZendSessionInterface;
 
 final class PSR7SessionAdapter implements ZendSessionInterface
 {
+    public const SESSION_REGENERATED_NAME = '_regenerated';
+
     /**
      * @var PSR7SessionInterface
      */
@@ -33,6 +35,8 @@ final class PSR7SessionAdapter implements ZendSessionInterface
     /**
      * @param string $name
      * @param mixed  $default
+     *
+     * @return mixed
      */
     public function get(string $name, $default = null)
     {
@@ -84,7 +88,9 @@ final class PSR7SessionAdapter implements ZendSessionInterface
      */
     public function regenerate(): ZendSessionInterface
     {
-        throw NotImplementedException::createForMethod(__METHOD__);
+        $this->session->set(self::SESSION_REGENERATED_NAME, time());
+
+        return $this;
     }
 
     /**
@@ -92,6 +98,6 @@ final class PSR7SessionAdapter implements ZendSessionInterface
      */
     public function isRegenerated(): bool
     {
-        return false;
+        return $this->session->has(self::SESSION_REGENERATED_NAME);
     }
 }

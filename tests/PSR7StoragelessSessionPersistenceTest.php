@@ -6,7 +6,6 @@ namespace Chubbyphp\Tests\Session\Storageless;
 
 use Chubbyphp\Mock\Call;
 use Chubbyphp\Mock\MockByCallsTrait;
-use Chubbyphp\Session\Storageless\MissingMiddlewareException;
 use Chubbyphp\Session\Storageless\PSR7StoragelessSessionPersistence;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -25,7 +24,7 @@ class PSR7StoragelessSessionPersistenceTest extends TestCase
 
     public function testInitializeSessionFromRequestWithMissingPsr7SessionAttribute(): void
     {
-        $this->expectException(MissingMiddlewareException::class);
+        $this->expectException(\UnexpectedValueException::class);
         $this->expectExceptionMessage(sprintf(
             'Please add the following middleware "%s" before execute this method "%s::initializeSessionFromRequest"',
             PSR7SessionMiddleware::class,
