@@ -16,25 +16,18 @@ final class PSR7SessionAdapter implements ZendSessionInterface
      */
     private $session;
 
-    /**
-     * @param PSR7SessionInterface $session
-     */
     public function __construct(PSR7SessionInterface $session)
     {
         $this->session = $session;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         return (array) $this->session->jsonSerialize();
     }
 
     /**
-     * @param string $name
-     * @param mixed  $default
+     * @param mixed $default
      *
      * @return mixed
      */
@@ -43,28 +36,19 @@ final class PSR7SessionAdapter implements ZendSessionInterface
         return $this->session->get($name, $default);
     }
 
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
     public function has(string $name): bool
     {
         return $this->session->has($name);
     }
 
     /**
-     * @param string $name
-     * @param mixed  $value
+     * @param mixed $value
      */
     public function set(string $name, $value): void
     {
         $this->session->set($name, $value);
     }
 
-    /**
-     * @param string $name
-     */
     public function unset(string $name): void
     {
         $this->session->remove($name);
@@ -75,17 +59,11 @@ final class PSR7SessionAdapter implements ZendSessionInterface
         $this->session->clear();
     }
 
-    /**
-     * @return bool
-     */
     public function hasChanged(): bool
     {
         return $this->session->hasChanged();
     }
 
-    /**
-     * @return ZendSessionInterface
-     */
     public function regenerate(): ZendSessionInterface
     {
         $this->session->set(self::SESSION_REGENERATED_NAME, time());
@@ -93,9 +71,6 @@ final class PSR7SessionAdapter implements ZendSessionInterface
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isRegenerated(): bool
     {
         return $this->session->has(self::SESSION_REGENERATED_NAME);

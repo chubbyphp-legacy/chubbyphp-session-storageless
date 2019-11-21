@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Chubbyphp\Tests\Session\Storageless;
+namespace Chubbyphp\Tests\Session\Storageless\Unit;
 
 use Chubbyphp\Mock\Argument\ArgumentCallback;
 use Chubbyphp\Mock\Call;
@@ -14,6 +14,8 @@ use PSR7Sessions\Storageless\Session\SessionInterface as PSR7SessionInterface;
 
 /**
  * @covers \Chubbyphp\Session\Storageless\PSR7SessionAdapter
+ *
+ * @internal
  */
 final class PSR7SessionAdapterTest extends TestCase
 {
@@ -110,7 +112,7 @@ final class PSR7SessionAdapterTest extends TestCase
             Call::create('set')
                 ->with(
                     '_regenerated',
-                    new ArgumentCallback(function (int $timestamp) {
+                    new ArgumentCallback(function (int $timestamp): void {
                         $now = time();
 
                         self::assertGreaterThanOrEqual($now, $timestamp + 10);

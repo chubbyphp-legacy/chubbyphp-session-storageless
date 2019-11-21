@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Chubbyphp\Tests\Session\Storageless;
+namespace Chubbyphp\Tests\Session\Storageless\Unit;
 
 use Chubbyphp\Session\Storageless\PSR7StoragelessSessionPersistence;
 use Lcobucci\JWT\Builder;
@@ -21,8 +21,10 @@ use Zend\Stratigility\MiddlewarePipe;
 
 /**
  * @coversNothing
+ *
+ * @internal
  */
-class PSR7StoragelessSessionPersistenceFunctionalTest extends TestCase
+final class PSR7StoragelessSessionPersistenceFunctionalTest extends TestCase
 {
     public function testNewWithoutAccessToTheSession(): void
     {
@@ -167,7 +169,8 @@ EOT;
             ->set(PSR7SessionMiddleware::SESSION_CLAIM, ['key' => 'value'])
             ->sign($signer, $signatureKey)
             ->getToken()
-            ->__toString();
+            ->__toString()
+        ;
 
         $request = new ServerRequest(
             ['HTTPS' => 'on'],

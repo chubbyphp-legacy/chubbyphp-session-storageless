@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Chubbyphp\Tests\Session\Storageless;
+namespace Chubbyphp\Tests\Session\Storageless\Unit;
 
 use Chubbyphp\Mock\Call;
 use Chubbyphp\Mock\MockByCallsTrait;
@@ -17,8 +17,10 @@ use Zend\Expressive\Session\SessionInterface as ZendSessionInterface;
 
 /**
  * @covers \Chubbyphp\Session\Storageless\PSR7StoragelessSessionPersistence
+ *
+ * @internal
  */
-class PSR7StoragelessSessionPersistenceTest extends TestCase
+final class PSR7StoragelessSessionPersistenceTest extends TestCase
 {
     use MockByCallsTrait;
 

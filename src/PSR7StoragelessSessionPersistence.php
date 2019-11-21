@@ -6,18 +6,13 @@ namespace Chubbyphp\Session\Storageless;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use PSR7Sessions\Storageless\Session\SessionInterface as PSR7SessionInterface;
 use PSR7Sessions\Storageless\Http\SessionMiddleware as PSR7SessionMiddleware;
+use PSR7Sessions\Storageless\Session\SessionInterface as PSR7SessionInterface;
 use Zend\Expressive\Session\SessionInterface as ZendSessionInterface;
 use Zend\Expressive\Session\SessionPersistenceInterface;
 
 final class PSR7StoragelessSessionPersistence implements SessionPersistenceInterface
 {
-    /**
-     * @param ServerRequestInterface $request
-     *
-     * @return ZendSessionInterface
-     */
     public function initializeSessionFromRequest(ServerRequestInterface $request): ZendSessionInterface
     {
         /** @var PSR7SessionInterface|null $psr7StoragelessSession */
@@ -35,12 +30,6 @@ final class PSR7StoragelessSessionPersistence implements SessionPersistenceInter
         return new PSR7SessionAdapter($psr7StoragelessSession);
     }
 
-    /**
-     * @param ZendSessionInterface $session
-     * @param ResponseInterface    $response
-     *
-     * @return ResponseInterface
-     */
     public function persistSession(ZendSessionInterface $session, ResponseInterface $response): ResponseInterface
     {
         return $response;
