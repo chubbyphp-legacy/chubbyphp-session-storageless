@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Chubbyphp\Session\Storageless;
 
+use Mezzio\Session\SessionInterface as MezzioSessionInterface;
+use Mezzio\Session\SessionPersistenceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use PSR7Sessions\Storageless\Http\SessionMiddleware as PSR7SessionMiddleware;
 use PSR7Sessions\Storageless\Session\SessionInterface as PSR7SessionInterface;
-use Zend\Expressive\Session\SessionInterface as ZendSessionInterface;
-use Zend\Expressive\Session\SessionPersistenceInterface;
 
 final class PSR7StoragelessSessionPersistence implements SessionPersistenceInterface
 {
-    public function initializeSessionFromRequest(ServerRequestInterface $request): ZendSessionInterface
+    public function initializeSessionFromRequest(ServerRequestInterface $request): MezzioSessionInterface
     {
         /** @var PSR7SessionInterface|null $psr7StoragelessSession */
         $psr7StoragelessSession = $request->getAttribute(PSR7SessionMiddleware::SESSION_ATTRIBUTE);
@@ -30,7 +30,7 @@ final class PSR7StoragelessSessionPersistence implements SessionPersistenceInter
         return new PSR7SessionAdapter($psr7StoragelessSession);
     }
 
-    public function persistSession(ZendSessionInterface $session, ResponseInterface $response): ResponseInterface
+    public function persistSession(MezzioSessionInterface $session, ResponseInterface $response): ResponseInterface
     {
         return $response;
     }

@@ -7,13 +7,13 @@ namespace Chubbyphp\Tests\Session\Storageless\Unit;
 use Chubbyphp\Mock\Call;
 use Chubbyphp\Mock\MockByCallsTrait;
 use Chubbyphp\Session\Storageless\PSR7StoragelessSessionPersistence;
+use Mezzio\Session\SessionInterface as MezzioSessionInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use PSR7Sessions\Storageless\Http\SessionMiddleware as PSR7SessionMiddleware;
 use PSR7Sessions\Storageless\Session\SessionInterface as PSR7SessionInterface;
-use Zend\Expressive\Session\SessionInterface as ZendSessionInterface;
 
 /**
  * @covers \Chubbyphp\Session\Storageless\PSR7StoragelessSessionPersistence
@@ -60,8 +60,8 @@ final class PSR7StoragelessSessionPersistenceTest extends TestCase
 
     public function testPersistSession(): void
     {
-        /** @var ZendSessionInterface|MockObject $zendSession */
-        $zendSession = $this->getMockByCalls(ZendSessionInterface::class, []);
+        /** @var MezzioSessionInterface|MockObject $zendSession */
+        $zendSession = $this->getMockByCalls(MezzioSessionInterface::class, []);
 
         /** @var ResponseInterface|MockObject $response */
         $response = $this->getMockByCalls(ResponseInterface::class);

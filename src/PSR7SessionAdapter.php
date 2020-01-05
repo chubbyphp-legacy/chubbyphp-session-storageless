@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Chubbyphp\Session\Storageless;
 
+use Mezzio\Session\SessionInterface as MezzioSessionInterface;
 use PSR7Sessions\Storageless\Session\SessionInterface as PSR7SessionInterface;
-use Zend\Expressive\Session\SessionInterface as ZendSessionInterface;
 
-final class PSR7SessionAdapter implements ZendSessionInterface
+final class PSR7SessionAdapter implements MezzioSessionInterface
 {
     public const SESSION_REGENERATED_NAME = '_regenerated';
 
@@ -21,6 +21,9 @@ final class PSR7SessionAdapter implements ZendSessionInterface
         $this->session = $session;
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function toArray(): array
     {
         return (array) $this->session->jsonSerialize();
@@ -64,7 +67,7 @@ final class PSR7SessionAdapter implements ZendSessionInterface
         return $this->session->hasChanged();
     }
 
-    public function regenerate(): ZendSessionInterface
+    public function regenerate(): MezzioSessionInterface
     {
         $this->session->set(self::SESSION_REGENERATED_NAME, time());
 

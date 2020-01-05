@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace Chubbyphp\Tests\Session\Storageless\Unit;
 
 use Chubbyphp\Session\Storageless\PSR7StoragelessSessionPersistence;
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\ServerRequest;
+use Laminas\Stratigility\MiddlewarePipe;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer\Rsa\Sha256;
+use Mezzio\Session\SessionInterface as MezzioSessionInterface;
+use Mezzio\Session\SessionMiddleware as MezzioSessionMiddleware;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use PSR7Sessions\Storageless\Http\SessionMiddleware as PSR7SessionMiddleware;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\ServerRequest;
-use Zend\Expressive\Session\SessionInterface as ZendSessionInterface;
-use Zend\Expressive\Session\SessionMiddleware as ZendSessionMiddleware;
-use Zend\Stratigility\MiddlewarePipe;
 
 /**
  * @coversNothing
@@ -66,7 +66,7 @@ EOT;
             $verificationKey,
             1200
         ));
-        $middlewarePipe->pipe(new ZendSessionMiddleware(new PSR7StoragelessSessionPersistence()));
+        $middlewarePipe->pipe(new MezzioSessionMiddleware(new PSR7StoragelessSessionPersistence()));
 
         $response = $middlewarePipe->process($request, $requestHandler);
 
@@ -84,11 +84,11 @@ EOT;
         $requestHandler = new class() implements RequestHandlerInterface {
             public function handle(ServerRequestInterface $request): ResponseInterface
             {
-                /** @var ZendSessionInterface $session */
-                $session = $request->getAttribute(ZendSessionMiddleware::SESSION_ATTRIBUTE);
+                /** @var MezzioSessionInterface $session */
+                $session = $request->getAttribute(MezzioSessionMiddleware::SESSION_ATTRIBUTE);
                 $session->set('key', 'value');
 
-                TestCase::assertInstanceOf(ZendSessionInterface::class, $session);
+                TestCase::assertInstanceOf(MezzioSessionInterface::class, $session);
 
                 return new Response();
             }
@@ -119,7 +119,7 @@ EOT;
             $verificationKey,
             1200
         ));
-        $middlewarePipe->pipe(new ZendSessionMiddleware(new PSR7StoragelessSessionPersistence()));
+        $middlewarePipe->pipe(new MezzioSessionMiddleware(new PSR7StoragelessSessionPersistence()));
 
         $response = $middlewarePipe->process($request, $requestHandler);
 
@@ -187,10 +187,10 @@ EOT;
         $requestHandler = new class() implements RequestHandlerInterface {
             public function handle(ServerRequestInterface $request): ResponseInterface
             {
-                /** @var ZendSessionInterface $session */
-                $session = $request->getAttribute(ZendSessionMiddleware::SESSION_ATTRIBUTE);
+                /** @var MezzioSessionInterface $session */
+                $session = $request->getAttribute(MezzioSessionMiddleware::SESSION_ATTRIBUTE);
 
-                TestCase::assertInstanceOf(ZendSessionInterface::class, $session);
+                TestCase::assertInstanceOf(MezzioSessionInterface::class, $session);
 
                 TestCase::assertSame(['key' => 'value'], $session->toArray());
 
@@ -206,7 +206,7 @@ EOT;
             $verificationKey,
             1200
         ));
-        $middlewarePipe->pipe(new ZendSessionMiddleware(new PSR7StoragelessSessionPersistence()));
+        $middlewarePipe->pipe(new MezzioSessionMiddleware(new PSR7StoragelessSessionPersistence()));
 
         $response = $middlewarePipe->process($request, $requestHandler);
 

@@ -9,15 +9,15 @@
 
 ## Description
 
-[psr7-sessions/storageless][2] persistence adapter for [zendframework/zend-expressive-session][3].
+[psr7-sessions/storageless][2] persistence adapter for [mezzio/mezzio-session][3].
 
 **Important**: Once the [Pull Request][4] within [psr7-sessions/storageless][2] gets merged, this repo is not needed anymore.
 
 ## Requirements
 
 * php: ^7.2
-* [psr7-sessions/storageless][2]: ^5.0
-* [zendframework/zend-expressive-session][3]: ^1.2
+* [mezzio/mezzio-session][2]: ^1.2
+* [psr7-sessions/storageless][3]: ^5.0
 
 ## Installation
 
@@ -29,7 +29,7 @@ composer require chubbyphp/chubbyphp-session-storageless "^1.0"
 
 ## Usage
 
-### With zend-stratigility using symmetric key (hmac)
+### With laminas-stratigility using symmetric key (hmac)
 
 #### Generate key
 
@@ -48,18 +48,18 @@ namespace App;
 
 use Chubbyphp\Session\Storageless\PSR7StoragelessSessionPersistence;
 use PSR7Sessions\Storageless\Http\SessionMiddleware as PSR7SessionMiddleware;
-use Zend\Expressive\Session\SessionMiddleware as ZendSessionMiddleware;
-use Zend\Stratigility\MiddlewarePipe;
+use Mezzio\Session\SessionMiddleware as MezzioSessionMiddleware;
+use Laminas\Stratigility\MiddlewarePipe;
 
 $middlewarePipe = new MiddlewarePipe();
 $middlewarePipe->pipe(PSR7SessionMiddleware::fromSymmetricKeyDefaults(
     'JeIn7GmQJRkM4dP3T5ZfVcHk7rxyVoMzR1DptTIquFY=',
     1200
 ));
-$middlewarePipe->pipe(new ZendSessionMiddleware(new PSR7StoragelessSessionPersistence()));
+$middlewarePipe->pipe(new MezzioSessionMiddleware(new PSR7StoragelessSessionPersistence()));
 ```
 
-### With zend-stratigility using asymmetric key (rsa)
+### With laminas-stratigility using asymmetric key (rsa)
 
 #### Generate key
 
@@ -79,8 +79,8 @@ namespace App;
 
 use Chubbyphp\Session\Storageless\PSR7StoragelessSessionPersistence;
 use PSR7Sessions\Storageless\Http\SessionMiddleware as PSR7SessionMiddleware;
-use Zend\Expressive\Session\SessionMiddleware as ZendSessionMiddleware;
-use Zend\Stratigility\MiddlewarePipe;
+use Mezzio\Session\SessionMiddleware as MezzioSessionMiddleware;
+use Laminas\Stratigility\MiddlewarePipe;
 
 $middlewarePipe = new MiddlewarePipe();
 $middlewarePipe->pipe(PSR7SessionMiddleware::fromAsymmetricKeyDefaults(
@@ -99,14 +99,14 @@ lv+Onm94oWNfx7ghZ+UpcgTwFl+oNMa/AbpO2a6fTuj558/Z0SlWFdUCAwEAAQ==
 -----END PUBLIC KEY-----',
     1200
 ));
-$middlewarePipe->pipe(new ZendSessionMiddleware(new PSR7StoragelessSessionPersistence()));
+$middlewarePipe->pipe(new MezzioSessionMiddleware(new PSR7StoragelessSessionPersistence()));
 ```
 
 ## Copyright
 
-Dominik Zogg 2019
+Dominik Zogg 2020
 
 [1]: https://packagist.org/packages/chubbyphp/chubbyphp-session-storageless
-[2]: https://github.com/psr7-sessions/storageless
-[3]: https://github.com/zendframework/zend-expressive-session
+[2]: https://github.com/mezzio/mezzio-session
+[3]: https://github.com/psr7-sessions/storageless
 [4]: https://github.com/psr7-sessions/storageless/pull/82
