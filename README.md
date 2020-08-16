@@ -2,10 +2,10 @@
 
 [![Build Status](https://api.travis-ci.org/chubbyphp/chubbyphp-session-storageless.png?branch=master)](https://travis-ci.org/chubbyphp/chubbyphp-session-storageless)
 [![Coverage Status](https://coveralls.io/repos/github/chubbyphp/chubbyphp-session-storageless/badge.svg?branch=master)](https://coveralls.io/github/chubbyphp/chubbyphp-session-storageless?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/chubbyphp/chubbyphp-session-storageless/v/stable.png)](https://packagist.org/packages/chubbyphp/chubbyphp-session-storageless)
 [![Total Downloads](https://poser.pugx.org/chubbyphp/chubbyphp-session-storageless/downloads.png)](https://packagist.org/packages/chubbyphp/chubbyphp-session-storageless)
 [![Monthly Downloads](https://poser.pugx.org/chubbyphp/chubbyphp-session-storageless/d/monthly)](https://packagist.org/packages/chubbyphp/chubbyphp-session-storageless)
-[![Latest Stable Version](https://poser.pugx.org/chubbyphp/chubbyphp-session-storageless/v/stable.png)](https://packagist.org/packages/chubbyphp/chubbyphp-session-storageless)
-[![Latest Unstable Version](https://poser.pugx.org/chubbyphp/chubbyphp-session-storageless/v/unstable)](https://packagist.org/packages/chubbyphp/chubbyphp-session-storageless)
+[![Daily Downloads](https://poser.pugx.org/chubbyphp/chubbyphp-session-storageless/d/daily)](https://packagist.org/packages/chubbyphp/chubbyphp-session-storageless)
 
 ## Description
 
