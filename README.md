@@ -11,7 +11,7 @@
 
 [psr7-sessions/storageless][2] persistence adapter for [mezzio/mezzio-session][3].
 
-**Important**: Once the [Pull Request][4] within [psr7-sessions/storageless][2] gets merged, this repo is not needed anymore.
+DEPRECATED: Use [storageless-mezzio-integration][4] instead.
 
 ## Requirements
 
@@ -109,4 +109,4 @@ Dominik Zogg 2020
 [1]: https://packagist.org/packages/chubbyphp/chubbyphp-session-storageless
 [2]: https://github.com/mezzio/mezzio-session
 [3]: https://github.com/psr7-sessions/storageless
-[4]: https://github.com/psr7-sessions/storageless/pull/82
+[4]: https://github.com/psr7-sessions/storageless-mezzio-integration
